@@ -5,26 +5,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "events")
+@Table(name = "food_order")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class events {
+public class FoodOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long event_type_id;
-    private String user_email;
-    private Date date;
-    private Long location_id;
-    private Long music_id;
-    private Long food_id;
-    private Long vendor_id;
-    private Long payment_id;
 
+    @ManyToOne
+    @JoinColumn(name = "food_type_id", nullable = false)
+    private FoodType foodType;
 
+    private long quantity;
+    private double price;
 }
