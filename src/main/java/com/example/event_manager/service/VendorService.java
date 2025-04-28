@@ -11,24 +11,55 @@ import java.util.List;
 public class VendorService {
 
     @Autowired
-    private VendorRepository vendorsRepository;
+    private VendorRepository vendorRepository;
 
-    public List<Vendor> getallVendors() {
-        return vendorsRepository.findAll();
+    public List<Vendor> getAllVendors() {
+        return vendorRepository.findAll();
+    }
+
+    public Vendor getVendorById(Long id) {
+        return vendorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vendor not found with id: " + id));
     }
 
     public List<Vendor> getVendorsByServiceType(String serviceType) {
-        return vendorsRepository.findByServiceType(serviceType);
+        return vendorRepository.findByServiceType(serviceType);
     }
 
-    public List<Vendor> getallfoodvendor(){
-        return vendorsRepository.findByServiceType("FOOD");
+    public Vendor createVendor(Vendor vendor) {
+        return vendorRepository.save(vendor);
     }
 
-    public List<Vendor> getallmusicvendor(){
-        return vendorsRepository.findByServiceType("MUSIC");
+    public  Vendor updateVendor(Long id, Vendor updatedVendor)
+    {
+        Vendor existingVendor=vendorRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("vendor not found"));
+        existingVendor.setName(updatedVendor.getName());
+        existingVendor.setPrice(updatedVendor.getPrice());
+        existingVendor.setServiceType(updatedVendor.getServiceType());
+        return vendorRepository.save(existingVendor);
     }
-    public List<Vendor> getallvenuevendor(){
-        return vendorsRepository.findByServiceType("VENUE");
+
+    public List<Vendor> getAllfoodvendor(){
+        return vendorRepository.findByServiceType("FOOD");
+    }
+
+    public List<Vendor> getAllmusicvendor(){
+        return vendorRepository.findByServiceType("MUSIC");
+    }
+    public List<Vendor> getAllvenuevendor(){
+        return vendorRepository.findByServiceType("VENUE");
+    }
+
+    public  Boolean deleteVendors(Long id)
+    {
+        if(vendorRepository.existsById(id))
+        {
+            vendorRepository.deleteById(id);
+            return true;
+        }
+        else {
+            return  false;
+        }
     }
 }

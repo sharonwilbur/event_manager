@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/admin")
+public class AdminController {
 
     @Autowired
     private EventTypesService eventTypesService;
@@ -40,25 +40,14 @@ public class UserController {
         return allevents;
     }
 
-    @PostMapping("/events")
-    public String createEvent(@RequestBody Events events)
-    {
-        eventsService.createEvent(events);
-        return "Event created";
-    }
-    @DeleteMapping("/events/{id}")
-    public ResponseEntity<String> deleteEvent(@PathVariable Long id) {
-        if (eventsService.deleteEvent(id)) {
-            // If deletion is successful, return HTTP 200 (OK) with a success message.
-            return ResponseEntity.ok("Event with id " + id + " was successfully deleted.");
-        } else {
-            // If the event doesn't exist, return HTTP 404 (Not Found) with a meaningful message.
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event with id " + id + " does not exist.");
-        }
-    }
     @GetMapping("/foodorder")
     public List<FoodOrder> getfood(){
         return foodOrderService.getAllFoodOrders();
+    }
+
+    @GetMapping("/vendor")
+    public List<Vendor> getallvendor(){
+        return vendorService.getAllVendors();
     }
 
     @GetMapping("/venuevendor")
@@ -76,7 +65,16 @@ public class UserController {
         return paymentservice.getAllPayments();
     }
 
-
+    @DeleteMapping("/events/{id}")
+    public ResponseEntity<String> deleteEvent(@PathVariable Long id) {
+        if (eventsService.deleteEvent(id)) {
+            // If deletion is successful, return HTTP 200 (OK) with a success message.
+            return ResponseEntity.ok("Event with id " + id + " was successfully deleted.");
+        } else {
+            // If the event doesn't exist, return HTTP 404 (Not Found) with a meaningful message.
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event with id " + id + " does not exist.");
+        }
+    }
 
 
 }

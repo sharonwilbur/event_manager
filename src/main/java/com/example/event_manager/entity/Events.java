@@ -21,7 +21,6 @@ public class Events {
 
     @ManyToOne
     @JoinColumn(name = "eventType_id", nullable = false)
-
     private EventTypes eventType;
 
     @ManyToOne

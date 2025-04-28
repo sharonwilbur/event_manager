@@ -19,7 +19,6 @@ public class Payment {
 
     @OneToOne
     @JoinColumn(name = "event_id", nullable = false)
-    @JsonIgnore
     private Events event;
 
     private double amount;
