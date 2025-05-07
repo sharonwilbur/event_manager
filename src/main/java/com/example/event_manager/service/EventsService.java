@@ -27,8 +27,8 @@ public class EventsService {
         return  events;
     }
 
-    public void createEvent(Events events){
-        eventsRepository.save(events);
+    public Events createEvent(Events events){
+        return eventsRepository.save(events);
     }
 
     @Transactional

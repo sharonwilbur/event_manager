@@ -1,7 +1,9 @@
 package com.example.event_manager.Repository;
 
-import com.example.event_manager.entity.UserDetails;
+import com.example.event_manager.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<UserDetails, String> {
+public interface UserRepository extends JpaRepository<User, String> {
+    Optional<User> findByEmail(String email);
 }

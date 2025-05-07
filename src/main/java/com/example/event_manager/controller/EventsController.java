@@ -30,9 +30,9 @@ public class EventsController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createevent(@RequestBody Events events) {
-        eventsService.createEvent(events);
-        return ResponseEntity.ok("Event Created");
+    public ResponseEntity<Events> createevent(@RequestBody Events events) {
+       Events ev=eventsService.createEvent(events);
+        return ResponseEntity.ok(ev);
     }
 
     @DeleteMapping("/{id}")

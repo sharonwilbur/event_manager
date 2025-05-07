@@ -22,7 +22,7 @@ public class Vendor {
     private String name;
     private Double price;
     private String serviceType;
-
+    private String email;
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Events> locations;

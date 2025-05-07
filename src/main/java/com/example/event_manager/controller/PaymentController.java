@@ -33,6 +33,7 @@ public class PaymentController {
     // Create a new payment
     @PostMapping
     public ResponseEntity<Payment> createPayment(@RequestBody Payment payment) {
+        System.out.println(payment);
         if (payment.getEvent() == null || payment.getEvent().getId() == null) {
             throw new RuntimeException("Event information is missing in the request.");
         }

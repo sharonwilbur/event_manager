@@ -25,7 +25,7 @@ public class Events {
 
     @ManyToOne
     @JoinColumn(name = "email_id", nullable = false)
-    private UserDetails userDetails;
+    private User user;
 
     private Date date;
 
